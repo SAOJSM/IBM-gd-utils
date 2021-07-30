@@ -20,16 +20,16 @@ IBM Cloud Fonudray + gd-utils + Github Actions
 >
 >3、獲得service account文件，並打包成accounts.zip上傳到能下載的地方，然後記錄下載url（可以直接上傳到自己的GoogleDrive）
 >
->4、在自己的GD團隊盤里面設置一個默認目錄，記錄下目錄ID
+>4、在自己的GD團隊盤裡面設置一個默認目錄，記錄下目錄ID
 >
 
 # 全自動安裝
 
-第一步：注冊IBM Cloud Fonudray記住賬號密碼 cloud.ibm.com
+第一步：註冊IBM Cloud Fonudray記住賬號密碼 cloud.ibm.com
 
-第二步：打開GitHub注冊，然後Fork本項目（順便點個Star）
+第二步：打開GitHub註冊，然後Fork本項目（順便點個Star）
 
-第三步：在你自己的GitHub項目里面點Settings（設置）然後點Secrets（隱私）新建如下內容
+第三步：在你自己的GitHub項目裡面點Settings（設置）然後點Secrets（隱私）新建如下內容
 
 Key | Value | Type | Required
 -- | -- | -- | --
@@ -42,7 +42,7 @@ DRIVE_ID | GD默認保存目錄ID | Secrets | Yes
 SA_DLURL | SA打包文件accounts.zip下載url | Secrets | Yes
 
 
-第四步：在你自己的GitHub項目里面，點Actions然後點左側IBM Cloud Auto Install切換，然後點 Run workflow 開始全自動安裝(看不到Auto Install的話，點開yml文件隨便加一空行保存)
+第四步：在你自己的GitHub項目裡面，點Actions然後點左側IBM Cloud Auto Install切換，然後點 Run workflow 開始全自動安裝(看不到Auto Install的話，點開yml文件隨便加一空行保存)
 
 結束
 
@@ -52,7 +52,7 @@ SA_DLURL | SA打包文件accounts.zip下載url | Secrets | Yes
 
 # 手動安裝
 
-第一步：注冊IBM Cloud Fonudray並自行新建容器
+第一步：註冊IBM Cloud Fonudray並自行新建容器
 
 第二步：打開IBM Cloud Shell輸入以下代碼 (shell在網頁右上角)
 
