@@ -1,15 +1,15 @@
 #!/bin/bash
 echo
-echo "============== <<部署之前先满足以下条件>> =============="
-echo "1.你的应用名称"
-echo "2.你的应用内存大小"
-echo "3.你的应用所在区域"
-echo "4.telegram机器人token"
-echo "5.telegram账号ID"
-echo "6.默认目的google drive团队盘ID"
-echo "7.获得SA文件，并打包成accounts.zip文件"
+echo "============== <<部署之前先滿足以下條件>> =============="
+echo "1.你的應用名稱"
+echo "2.你的應用內存大小"
+echo "3.你的應用所在區域"
+echo "4.telegram機器人token"
+echo "5.telegram賬號ID"
+echo "6.默認目的google drive團隊盤ID"
+echo "7.獲得SA文件，並打包成accounts.zip文件"
 echo "------------------------------------------------"
-read -s -n1 -p "已做好准备请按任意键开始"
+read -s -n1 -p "已做好準備請按任意鍵開始"
 echo
 echo "------------------------------------------------"
 
@@ -17,30 +17,30 @@ SH_PATH=$(cd "$(dirname "$0")";pwd)
 cd ${SH_PATH}
 
 create_mainfest_file(){
-    echo "进行配置。。。"
-    read -p "请输入你的应用名称：" IBM_APP_NAME
-    echo "应用名称：${IBM_APP_NAME}"
-    read -p "请输入你的应用内存大小(默认256)：" IBM_MEM_SIZE
+    echo "進行配置。。。"
+    read -p "請輸入你的應用名稱：" IBM_APP_NAME
+    echo "應用名稱：${IBM_APP_NAME}"
+    read -p "請輸入你的應用內存大小(默認256)：" IBM_MEM_SIZE
     if [ -z "${IBM_MEM_SIZE}" ];then
     IBM_MEM_SIZE=256
     fi
-    echo "内存大小：${IBM_MEM_SIZE}"
-    read -p "请输入你的应用所在区域(不知道的看应用URL，cf前面的us-south就是)：" IBM_APP_REGION
-    echo "应用所在区域：${IBM_APP_REGION}"
+    echo "內存大小：${IBM_MEM_SIZE}"
+    read -p "請輸入你的應用所在區域(不知道的看應用URL，cf前面的us-south就是)：" IBM_APP_REGION
+    echo "應用所在區域：${IBM_APP_REGION}"
 
-    read -p "请输入机器人token：" BOT_TOKEN
+    read -p "請輸入機器人token：" BOT_TOKEN
     while [[ "${#BOT_TOKEN}" != 46 ]]; do
-    echo "机器人TOKEN输入不正确，请重新输入"
-    read -p """请输入机器人token：" BOT_TOKEN
+    echo "機器人TOKEN輸入不正確，請重新輸入"
+    read -p """請輸入機器人token：" BOT_TOKEN
     done
 
-    read -p "请输入使用机器人的telegram账号ID：" TG_USERNAME
-    echo "你的TG账号${TG_USERNAME}"
+    read -p "請輸入使用機器人的telegram賬號ID：" TG_USERNAME
+    echo "你的TG賬號${TG_USERNAME}"
 
-    read -p "请输入转存默认目的地团队盘ID：" DRIVE_ID
+    read -p "請輸入轉存默認目的地團隊盤ID：" DRIVE_ID
     while [[ "${#DRIVE_ID}" != 19 && "${#DRIVE_ID}" != 33 ]]; do
-    echo "你的Google team drive ID输入不正确"
-    read -p "请输入转存默认目的地ID：" DRIVE_ID
+    echo "你的Google team drive ID輸入不正確"
+    read -p "請輸入轉存默認目的地ID：" DRIVE_ID
     done
 
     cd ~ &&
@@ -58,18 +58,18 @@ create_mainfest_file(){
 }
 
 clone_repo(){
-    echo "进行初始化。。。"
+    echo "進行初始化。。。"
     git clone https://github.com/artxia/IBM-gd-utils
     cd IBM-gd-utils
     git submodule update --init --recursive
     cd gd-utils/sa
-    echo "请点击网页右上角的上传功能，上传sa打包成的accounts.zip文件，注意命名和压缩格式要和示例相同"
-    read -s -n1 -p "已做好准备请按任意键开始"
+    echo "請點擊網頁右上角的上傳功能，上傳sa打包成的accounts.zip文件，注意命名和壓縮格式要和示例相同"
+    read -s -n1 -p "已做好準備請按任意鍵開始"
     while [ ! -f ${SH_PATH}/accounts.zip ]; do
-    echo "。。。。。。上传文件错误，请重新上传"
-    read -p "按回车键重试"
+    echo "。。。。。。上傳文件錯誤，請重新上傳"
+    read -p "按回車鍵重試"
     done
-    echo "正在解压。。。"
+    echo "正在解壓。。。"
     cp -r ${SH_PATH}/accounts.zip  ${SH_PATH}/IBM-gd-utils/gd-utils/sa/
     unzip -oj accounts.zip
     sleep 10s
@@ -77,8 +77,8 @@ clone_repo(){
 }
 
 install(){
-    echo "进行安装。。。"
-# 解除sudu权限限制
+    echo "進行安裝。。。"
+# 解除sudu權限限制
     mkdir ~/.npm-global
     npm config set prefix '~/.npm-global'
     sed -i '$a\export PATH=~/.npm-global/bin:$PATH' ~/.profile
@@ -89,9 +89,9 @@ install(){
     cd ..
     ibmcloud target --cf
     ibmcloud cf push
-    echo "安装完成。"
+    echo "安裝完成。"
     sleep 3s
-	echo "检查是否部署成功。。。"
+	echo "檢查是否部署成功。。。"
     echo ${IBM_APP_NAME}.${IBM_APP_REGION}.cf.appdomain.cloud/api/gdurl/count?fid=124pjM5LggSuwI1n40bcD5tQ13wS0M6wg
     curl ${IBM_APP_NAME}.${IBM_APP_REGION}.cf.appdomain.cloud/api/gdurl/count?fid=124pjM5LggSuwI1n40bcD5tQ13wS0M6wg
     curl -F "url=https://${IBM_APP_NAME}.${IBM_APP_REGION}.cf.appdomain.cloud/api/gdurl/tgbot" 'https://api.telegram.org/bot${BOT_TOKEN}/setWebhook'
