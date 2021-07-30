@@ -59,7 +59,7 @@ create_mainfest_file(){
 
 clone_repo(){
     echo "進行初始化。。。"
-    git clone https://github.com/artxia/IBM-gd-utils
+    git clone https://github.com/SAOJSM/IBM-gd-utils
     cd IBM-gd-utils
     git submodule update --init --recursive
     cd gd-utils/sa
