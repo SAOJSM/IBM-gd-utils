@@ -20,7 +20,7 @@ jobs:
     - name: Download Accounts File
       run: |
         git submodule update --init --recursive
-        cd gdutils/sa
+        cd gdutil/sa
         curl -L "${{ secrets.SA_DLURL }}" -o accounts.zip
         unzip -jq -o accounts.zip
 
