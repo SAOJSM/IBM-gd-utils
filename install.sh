@@ -46,14 +46,14 @@ create_mainfest_file(){
     cd ~ &&
     sed -i "s/cloud_fonudray_name/${IBM_APP_NAME}/g" ${SH_PATH}/IBM-gd-utils/manifest.yml &&
     sed -i "s/cloud_fonudray_mem/${IBM_MEM_SIZE}/g" ${SH_PATH}/IBM-gd-utils/manifest.yml && 
-    sed -i "s/bot_token/${BOT_TOKEN}/g" ${SH_PATH}/IBM-gd-utils/gd-utils/config.js &&
-    sed -i "s/your_tg_username/${TG_USERNAME}/g" ${SH_PATH}/IBM-gd-utils/gd-utils/config.js && 
-    sed -i "s/DEFAULT_TARGET = ''/DEFAULT_TARGET = '${DRIVE_ID}'/g" ${SH_PATH}/IBM-gd-utils/gd-utils/config.js&&
-    sed -i "s/23333/8080/g" ${SH_PATH}/IBM-gd-utils/gd-utils/server.js &&
-    sed -i "s@https_proxy='http://127.0.0.1:1086' nodemon@pm2-runtime start@g" ${SH_PATH}/IBM-gd-utils/gd-utils/package.json&&
-    sed -i '/scripts/a\    "preinstall": "npm install pm2 -g",' ${SH_PATH}/IBM-gd-utils/gd-utils/package.json&&
-    sed -i '/repository/a\  "engines": {\n    "node": "12.*"\n  },' ${SH_PATH}/IBM-gd-utils/gd-utils/package.json&&
-    sed -i '/dependencies/a\    "pm2": "^3.2.8",' ${SH_PATH}/IBM-gd-utils/gd-utils/package.json
+    sed -i "s/bot_token/${BOT_TOKEN}/g" ${SH_PATH}/IBM-gd-utils/gdutils/config.js &&
+    sed -i "s/your_tg_username/${TG_USERNAME}/g" ${SH_PATH}/IBM-gd-utils/gdutils/config.js && 
+    sed -i "s/DEFAULT_TARGET = ''/DEFAULT_TARGET = '${DRIVE_ID}'/g" ${SH_PATH}/IBM-gd-utils/gdutils/config.js&&
+    sed -i "s/23333/8080/g" ${SH_PATH}/IBM-gd-utils/gdutils/server.js &&
+    sed -i "s@https_proxy='http://127.0.0.1:1086' nodemon@pm2-runtime start@g" ${SH_PATH}/IBM-gd-utils/gdutils/package.json&&
+    sed -i '/scripts/a\    "preinstall": "npm install pm2 -g",' ${SH_PATH}/IBM-gd-utils/gdutils/package.json&&
+    sed -i '/repository/a\  "engines": {\n    "node": "12.*"\n  },' ${SH_PATH}/IBM-gd-utils/gdutils/package.json&&
+    sed -i '/dependencies/a\    "pm2": "^3.2.8",' ${SH_PATH}/IBM-gd-utils/gdutils/package.json
     echo "配置完成。"
 }
 
@@ -62,7 +62,7 @@ clone_repo(){
     git clone https://github.com/SAOJSM/IBM-gd-utils
     cd IBM-gd-utils
     git submodule update --init --recursive
-    cd gd-utils/sa
+    cd gdutils/sa
     echo "請點擊網頁右上角的上傳功能，上傳sa打包成的accounts.zip文件，注意命名和壓縮格式要和示例相同"
     read -s -n1 -p "已做好準備請按任意鍵開始"
     while [ ! -f ${SH_PATH}/accounts.zip ]; do
@@ -70,7 +70,7 @@ clone_repo(){
     read -p "按回車鍵重試"
     done
     echo "正在解壓。。。"
-    cp -r ${SH_PATH}/accounts.zip  ${SH_PATH}/IBM-gd-utils/gd-utils/sa/
+    cp -r ${SH_PATH}/accounts.zip  ${SH_PATH}/IBM-gd-utils/gdutils/sa/
     unzip -oj accounts.zip
     sleep 10s
     echo "初始化完成。"
