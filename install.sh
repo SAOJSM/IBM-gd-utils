@@ -46,14 +46,14 @@ create_mainfest_file(){
     cd ~ &&
     sed -i "s/cloud_fonudray_name/${IBM_APP_NAME}/g" ${SH_PATH}/IBM-gd-utils/manifest.yml &&
     sed -i "s/cloud_fonudray_mem/${IBM_MEM_SIZE}/g" ${SH_PATH}/IBM-gd-utils/manifest.yml && 
-    sed -i "s/bot_token/${BOT_TOKEN}/g" ${SH_PATH}/IBM-gd-utils/gdutils/config.js &&
-    sed -i "s/your_tg_username/${TG_USERNAME}/g" ${SH_PATH}/IBM-gd-utils/gdutils/config.js && 
-    sed -i "s/DEFAULT_TARGET = ''/DEFAULT_TARGET = '${DRIVE_ID}'/g" ${SH_PATH}/IBM-gd-utils/gdutils/config.js&&
+    sed -i "s/bot_token/${BOT_TOKEN}/g" ${SH_PATH}/IBM-gd-utils/gdutil/config.js &&
+    sed -i "s/your_tg_username/${TG_USERNAME}/g" ${SH_PATH}/IBM-gd-utils/gdutil/config.js && 
+    sed -i "s/DEFAULT_TARGET = ''/DEFAULT_TARGET = '${DRIVE_ID}'/g" ${SH_PATH}/IBM-gd-utils/gdutil/config.js&&
     sed -i "s/23333/8080/g" ${SH_PATH}/IBM-gd-utils/gdutils/server.js &&
-    sed -i "s@https_proxy='http://127.0.0.1:1086' nodemon@pm2-runtime start@g" ${SH_PATH}/IBM-gd-utils/gdutils/package.json&&
-    sed -i '/scripts/a\    "preinstall": "npm install pm2 -g",' ${SH_PATH}/IBM-gd-utils/gdutils/package.json&&
-    sed -i '/repository/a\  "engines": {\n    "node": "12.*"\n  },' ${SH_PATH}/IBM-gd-utils/gdutils/package.json&&
-    sed -i '/dependencies/a\    "pm2": "^3.2.8",' ${SH_PATH}/IBM-gd-utils/gdutils/package.json
+    sed -i "s@https_proxy='http://127.0.0.1:1086' nodemon@pm2-runtime start@g" ${SH_PATH}/IBM-gd-utils/gdutil/package.json&&
+    sed -i '/scripts/a\    "preinstall": "npm install pm2 -g",' ${SH_PATH}/IBM-gd-utils/gdutil/package.json&&
+    sed -i '/repository/a\  "engines": {\n    "node": "12.*"\n  },' ${SH_PATH}/IBM-gd-utils/gdutil/package.json&&
+    sed -i '/dependencies/a\    "pm2": "^3.2.8",' ${SH_PATH}/IBM-gd-utils/gdutil/package.json
     echo "配置完成。"
 }
 
