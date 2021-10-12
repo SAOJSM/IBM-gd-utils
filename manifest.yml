@@ -1,7 +1,7 @@
 applications:
 - path: gdutil
   name: cloud_fonudray_name
-  random-route: true
+  route: {{ secrets.IBM_APP_NAME }}.us-south.cf.appdomain.cloud
   memory: 256M
   buildpacks:
   - https://github.com/cloudfoundry/nodejs-buildpack.git
