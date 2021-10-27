@@ -20,7 +20,7 @@ jobs:
     - name: Download Accounts File
       run: |
         git submodule update --init --recursive
-        cd gdutil/sa
+        cd gd-utils/sa
         curl -L "${{ secrets.SA_DLURL }}" -o accounts.zip
         unzip -jq -o accounts.zip
 
@@ -29,14 +29,14 @@ jobs:
         cd
         sed -i "s/cloud_fonudray_name/${{ secrets.IBM_APP_NAME }}/g" ${GITHUB_WORKSPACE}/manifest.yml
         sed -i "s/cloud_fonudray_mem/256/g" ${GITHUB_WORKSPACE}/manifest.yml
-        sed -i "s/bot_token/${{ secrets.TG_TOKEN }}/g" ${GITHUB_WORKSPACE}/gdutil/config.js
-        sed -i "s/your_tg_username/${{ secrets.TG_USERNAME }}/g" ${GITHUB_WORKSPACE}/gdutil/config.js
-        sed -i "s/DEFAULT_TARGET = ''/DEFAULT_TARGET = '${{ secrets.DRIVE_ID }}'/g" ${GITHUB_WORKSPACE}/gdutil/config.js
-        sed -i "s/23333/8080/g" ${GITHUB_WORKSPACE}/gdutil/server.js
-        sed -i "s@https_proxy='http://127.0.0.1:1086' nodemon@pm2-runtime start@g" ${GITHUB_WORKSPACE}/gdutil/package.json
-        sed -i '/scripts/a\    "preinstall": "npm install pm2 -g",' ${GITHUB_WORKSPACE}/gdutil/package.json
-        sed -i '/repository/a\  "engines": {\n    "node": "12.*"\n  },' ${GITHUB_WORKSPACE}/gdutil/package.json
-        sed -i '/dependencies/a\    "pm2": "^3.2.8",' ${GITHUB_WORKSPACE}/gdutil/package.json
+        sed -i "s/bot_token/${{ secrets.TG_TOKEN }}/g" ${GITHUB_WORKSPACE}/gd-utils/config.js
+        sed -i "s/your_tg_username/${{ secrets.TG_USERNAME }}/g" ${GITHUB_WORKSPACE}/gd-utils/config.js
+        sed -i "s/DEFAULT_TARGET = ''/DEFAULT_TARGET = '${{ secrets.DRIVE_ID }}'/g" ${GITHUB_WORKSPACE}/gd-utils/config.js
+        sed -i "s/23333/8080/g" ${GITHUB_WORKSPACE}/gd-utils/server.js
+        sed -i "s@https_proxy='http://127.0.0.1:1086' nodemon@pm2-runtime start@g" ${GITHUB_WORKSPACE}/gd-utils/package.json
+        sed -i '/scripts/a\    "preinstall": "npm install pm2 -g",' ${GITHUB_WORKSPACE}/gd-utils/package.json
+        sed -i '/repository/a\  "engines": {\n    "node": "12.*"\n  },' ${GITHUB_WORKSPACE}/gd-utils/package.json
+        sed -i '/dependencies/a\    "pm2": "^3.2.8",' ${GITHUB_WORKSPACE}/gd-utils/package.json
 
     - name: Install GD-utils Dependencies
       run: |
@@ -44,7 +44,7 @@ jobs:
         npm config set prefix '~/.npm-global'
         sed -i '$a\export PATH=~/.npm-global/bin:$PATH' ~/.profile
         source ~/.profile
-        cd ${GITHUB_WORKSPACE}/gdutil
+        cd ${GITHUB_WORKSPACE}/gd-utils
         npm i
         cd ..
 
