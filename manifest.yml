@@ -1,8 +1,8 @@
 applications:
-- path: gdutil
+- path: gd-utils
   name: cloud_fonudray_name
   random-route: true
-  memory: 256M
+  memory: cloud_fonudray_memM
   buildpacks:
   - https://github.com/cloudfoundry/nodejs-buildpack.git
   command: pm2-runtime start server.js
